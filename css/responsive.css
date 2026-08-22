@@ -1,0 +1,9 @@
+.project {
+  display: block;
+}
+
+@media (max-width: 780px) {
+  .project--intro h2 {
+    font-size: clamp(3.75rem, 17vw, 5rem);
+  }
+}
