@@ -43,7 +43,6 @@ function initMotion(reduced) {
     .from(".hero__media", { clipPath: "polygon(100% 0,100% 0,100% 100%,100% 100%,100% 72%,100% 50%)", duration: 1.35 }, "-=1")
     .from(".hero__footer > *", { y: 20, opacity: 0, duration: .7, stagger: .12 }, "-=.6");
   gsap.to(".hero__media img", { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-  document.querySelectorAll(".text-scrub span").forEach((line, i) => gsap.to(line, { color: "#eee9dc", ease: "none", scrollTrigger: { trigger: line, start: "top 78%", end: "top 48%", scrub: true } }));
   document.querySelectorAll(".media-reveal img").forEach(img => gsap.fromTo(img, { scale: 1.1, opacity: .55 }, { scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: img.parentElement, start: "top 92%", end: "center 55%", scrub: true } }));
   document.querySelectorAll(".role").forEach(role => ScrollTrigger.create({ trigger: role, start: "top 62%", end: "bottom 38%", onToggle: ({ isActive }) => role.classList.toggle("is-current", isActive) }));
   gsap.to(".experience__meter span", { width: "100%", ease: "none", scrollTrigger: { trigger: ".experience", start: "top 15%", end: "bottom 85%", scrub: true } });
