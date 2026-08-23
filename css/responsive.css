@@ -104,12 +104,12 @@
   bottom: 7rem;
 }
 
-.project--loop > img:first-child {
+.project--loop picture:first-child img {
   width: 100%;
   object-position: center;
 }
 
-.project--eclipsed > img:first-child {
+.project--eclipsed picture:first-child img {
   object-position: center 68%;
   filter: saturate(0.82) contrast(1.22) brightness(0.82);
 }
