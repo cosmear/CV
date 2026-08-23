@@ -3,127 +3,369 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio de Cosme Argerich, Game Developer y Full Stack Web Developer." />
+    
+    <!-- Metadatos Primarios y SEO -->
+    <title>Cosme Argerich — Game Developer &amp; Full Stack Web Developer</title>
+    <meta name="title" content="Cosme Argerich — Game Developer &amp; Full Stack Web Developer" />
+    <meta name="description" content="Portfolio profesional de Cosme Argerich. Game Developer y Full Stack Web Developer en Buenos Aires (CABA), Argentina. Cofundador de Loop Smiths. Especializado en Unity, Unreal Engine, C++, C#, JavaScript y soluciones interactivas." />
+    <meta name="keywords" content="Cosme Argerich, Game Developer, Full Stack Developer, Desarrollador de Videojuegos, CABA, Buenos Aires, Argentina, Loop Smiths, Unity, Unreal Engine, C++, C#, JavaScript, HTML5, CSS3, Automatización de Procesos, UADE" />
+    <meta name="author" content="Cosme Argerich" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#0b0d0b" />
-    <title>Cosme Argerich — Creative Developer</title>
+    <link rel="canonical" href="https://cosmear.github.io/CV/" />
+
+    <!-- Geolocalización -->
+    <meta name="geo.region" content="AR-C" />
+    <meta name="geo.placename" content="Ciudad Autónoma de Buenos Aires" />
+    <meta name="geo.position" content="-34.6037;-58.3816" />
+    <meta name="ICBM" content="-34.6037, -58.3816" />
+
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cosmear.github.io/CV/" />
+    <meta property="og:title" content="Cosme Argerich — Game Developer &amp; Full Stack Web Developer" />
+    <meta property="og:description" content="Perfil profesional y portfolio de Cosme Argerich. Explora proyectos de videojuegos (Unreal Engine, Unity), sitios web interactivos y automatización de procesos." />
+    <meta property="og:image" content="https://cosmear.github.io/CV/assets/direction/hero-photo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Cosme Argerich - Game Developer &amp; Full Stack Web Developer" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Cosme Argerich Portfolio" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://cosmear.github.io/CV/" />
+    <meta name="twitter:title" content="Cosme Argerich — Game Developer &amp; Full Stack Web Developer" />
+    <meta name="twitter:description" content="Perfil profesional y portfolio de Cosme Argerich. Explora proyectos de videojuegos, aplicaciones web y sistemas interactivos." />
+    <meta name="twitter:image" content="https://cosmear.github.io/CV/assets/direction/hero-photo.png" />
+
+    <!-- Favicon & Iconos -->
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/favicon.svg" />
+
+    <!-- Preconexión y Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" />
-    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+    
+    <!-- Hojas de Estilo -->
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    
+    <!-- Scripts -->
+    <script src="js/translations.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="js/main.js" defer></script>
+
+    <!-- Datos Estructurados JSON-LD (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://cosmear.github.io/CV/#person",
+          "name": "Cosme Argerich",
+          "jobTitle": "Game Developer & Full Stack Web Developer",
+          "description": "Estudiante de Licenciatura en Desarrollo de Videojuegos en UADE, cofundador de Loop Smiths y desarrollador web full stack especializado en experiencias interactivas y automatización de procesos.",
+          "url": "https://cosmear.github.io/CV/",
+          "image": "https://cosmear.github.io/CV/assets/direction/hero-photo.png",
+          "email": "mailto:cargarerich8@gmail.com",
+          "telephone": "+5491155746444",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ciudad Autónoma de Buenos Aires",
+            "addressRegion": "CABA",
+            "addressCountry": "AR"
+          },
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "Universidad Argentina de la Empresa",
+              "alternateName": "UADE"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Digital House"
+            }
+          ],
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Loop Smiths",
+            "url": "https://loop-smith.com/"
+          },
+          "sameAs": [
+            "https://github.com/cosmear",
+            "https://www.linkedin.com/in/cosme-argerich-99630a239/",
+            "https://loop-smith.com/",
+            "https://isla-games-studio.itch.io/eclipsed-fates",
+            "https://insulagames.itch.io/onna"
+          ],
+          "knowsAbout": [
+            "Game Development",
+            "Full Stack Web Development",
+            "C++",
+            "C#",
+            "JavaScript",
+            "HTML5",
+            "CSS3",
+            "Unity",
+            "Unreal Engine",
+            "Process Automation",
+            "Software Architecture"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://cosmear.github.io/CV/#website",
+          "url": "https://cosmear.github.io/CV/",
+          "name": "Cosme Argerich Portfolio",
+          "description": "Portfolio profesional de Cosme Argerich - Game Developer & Full Stack Web Developer",
+          "inLanguage": "es",
+          "publisher": {
+            "@id": "https://cosmear.github.io/CV/#person"
+          }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://cosmear.github.io/CV/#webpage",
+          "url": "https://cosmear.github.io/CV/",
+          "name": "Cosme Argerich — Game Developer & Full Stack Web Developer",
+          "isPartOf": {
+            "@id": "https://cosmear.github.io/CV/#website"
+          },
+          "about": {
+            "@id": "https://cosmear.github.io/CV/#person"
+          },
+          "inLanguage": "es"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <a class="skip-link" href="#main"><span data-i18n="skip_link">Saltar al contenido</span></a>
     <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
 
     <nav class="nav" aria-label="Navegación principal">
       <a class="nav__brand" href="#hero" aria-label="Ir al inicio" data-cursor="TOP">CA<span>.</span></a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span>MENÚ</span><i></i></button>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span data-i18n="nav_menu">MENÚ</span><i></i></button>
       <div class="nav__links" id="nav-links">
-        <a href="#profile">Perfil</a><a href="#experience">Experiencia</a><a href="#skills">Skills</a><a href="#projects">Proyectos</a><a href="#contact">Contacto</a>
+        <a href="#profile"><span data-i18n="nav_profile">Perfil</span></a>
+        <a href="#experience"><span data-i18n="nav_experience">Experiencia</span></a>
+        <a href="#skills"><span data-i18n="nav_skills">Skills</span></a>
+        <a href="#projects"><span data-i18n="nav_projects">Proyectos</span></a>
+        <a href="#contact"><span data-i18n="nav_contact">Contacto</span></a>
       </div>
-      <div class="nav__status" aria-label="Estado profesional"><i></i> CABA / Disponible</div>
+      <div class="nav__right">
+        <div class="nav__status" aria-label="Estado profesional"><i></i> <span data-i18n="nav_status">CABA / Disponible</span></div>
+        <div class="nav__lang mono">
+          <button type="button" class="lang-btn translate-es-btn" onclick="updateLanguage('es')" aria-label="Cambiar a Español">ES</button>
+          <button type="button" class="lang-btn translate-en-btn" onclick="updateLanguage('en')" aria-label="Switch to English">EN</button>
+        </div>
+      </div>
     </nav>
 
     <main id="main">
       <header class="hero" id="hero">
         <div class="hero__grid" aria-hidden="true"></div>
-        <div class="hero__media media-reveal" aria-hidden="true"><img src="assets/direction/hero-photo.png" alt="" /></div>
-        <div class="hero__eyebrow mono"><span>DESARROLLO</span><i></i><span>DISEÑO</span><i></i><span>LÓGICA</span></div>
+        <div class="hero__media media-reveal" aria-hidden="true">
+          <picture>
+            <source srcset="assets/direction/hero-photo.avif" type="image/avif" />
+            <source srcset="assets/direction/hero-photo.webp" type="image/webp" />
+            <img src="assets/direction/hero-photo.png" width="1672" height="941" alt="Retrato conceptual de Cosme Argerich en su estudio de desarrollo de videojuegos y sistemas web" fetchpriority="high" />
+          </picture>
+        </div>
+        <div class="hero__eyebrow mono"><span data-i18n="hero_eyebrow_1">DESARROLLO</span><i></i><span data-i18n="hero_eyebrow_2">DISEÑO</span><i></i><span data-i18n="hero_eyebrow_3">LÓGICA</span></div>
         <h1 class="hero__title" aria-label="Cosme Argerich"><span class="hero__line">COSME</span><span class="hero__line hero__line--offset">ARGERICH</span></h1>
         <div class="hero__footer">
-          <p>Game Developer <span>&amp;</span><br />Full Stack Web Developer</p>
-          <a class="arrow-link" href="#projects" data-cursor="VIEW">Ver proyectos <span aria-hidden="true">↘</span></a>
+          <p><span data-i18n="hero_subtitle_game">Game Developer</span> <span>&amp;</span><br /><span data-i18n="hero_subtitle_web">Full Stack Web Developer</span></p>
+          <a class="arrow-link" href="#projects" data-cursor="VIEW"><span data-i18n="hero_view_projects">Ver proyectos</span> <span aria-hidden="true">↘</span></a>
         </div>
         <div class="hero__coord mono" aria-hidden="true">34.6037° S<br />58.3816° W</div>
-        <a class="scroll-cue mono" href="#profile" aria-label="Ir a perfil">SCROLL <span></span></a>
+        <a class="scroll-cue mono" href="#profile" aria-label="Ir a perfil"><span data-i18n="hero_scroll">SCROLL</span> <span></span></a>
       </header>
 
       <section class="profile chapter" id="profile">
-        <div class="chapter-mark mono" aria-hidden="true">FIELD NOTE / PROFILE</div>
-        <div class="profile__visual media-reveal"><img src="assets/direction/profile-photo.png" alt="Manos trabajando sobre componentes de un control de videojuegos" /></div>
+        <div class="chapter-mark mono" aria-hidden="true" data-i18n="profile_field_note">FIELD NOTE / PROFILE</div>
+        <div class="profile__visual media-reveal">
+          <picture>
+            <source srcset="assets/direction/profile-photo.avif" type="image/avif" />
+            <source srcset="assets/direction/profile-photo.webp" type="image/webp" />
+            <img src="assets/direction/profile-photo.png" width="1672" height="941" alt="Manos de desarrollador ensamblando y testeando componentes de un controlador de videojuegos" loading="lazy" />
+          </picture>
+        </div>
         <div class="profile__copy">
-          <p class="kicker mono">PERFIL</p>
-          <h2 class="profile__statement text-scrub"><span>Estudio, diseño y construyo</span><span>experiencias interactivas</span><span>que resuelven problemas complejos.</span></h2>
-          <p class="profile__body">Estudiante de <strong>Licenciatura en Desarrollo de Videojuegos en UADE</strong>. Experiencia en desarrollo de videojuegos y en desarrollo web full stack, creando apps web, sitios y soluciones online orientadas a negocios y organizaciones. Apasionado por la tecnología, la creación de experiencias interactivas y la resolución de problemas complejos.</p>
+          <p class="kicker mono" data-i18n="profile_kicker">PERFIL</p>
+          <h2 class="profile__statement text-scrub"><span data-i18n="profile_stmt_1">Estudio, diseño y construyo</span><span data-i18n="profile_stmt_2">experiencias interactivas</span><span data-i18n="profile_stmt_3">que resuelven problemas complejos.</span></h2>
+          <p class="profile__body" data-i18n="profile_body">Estudiante de <strong>Licenciatura en Desarrollo de Videojuegos en UADE</strong>. Experiencia en desarrollo de videojuegos y en desarrollo web full stack, creando apps web, sitios y soluciones online orientadas a negocios y organizaciones. Apasionado por la tecnología, la creación de experiencias interactivas y la resolución de problemas complejos.</p>
           <div class="profile__meta mono">
-            <span><small>UBICACIÓN</small>CABA, Argentina</span>
-            <a href="mailto:cargarerich8@gmail.com" data-cursor="MAIL"><small>EMAIL</small>cargarerich8@gmail.com</a>
+            <span><small data-i18n="profile_location_label">UBICACIÓN</small><span data-i18n="profile_location_val">CABA, Argentina</span></span>
+            <a href="mailto:cargarerich8@gmail.com" data-cursor="MAIL"><small data-i18n="profile_email_label">EMAIL</small><span>cargarerich8@gmail.com</span></a>
           </div>
         </div>
       </section>
 
       <section class="experience chapter" id="experience">
         <div class="experience__intro">
-          <p class="kicker mono">TRAYECTORIA</p><h2>EXPERIENCIA</h2>
-          <p>Ingeniería, automatización y educación tecnológica: distintos campos, una misma forma de pensar sistemas.</p>
+          <p class="kicker mono" data-i18n="exp_kicker">TRAYECTORIA</p><h2 data-i18n="exp_title">EXPERIENCIA</h2>
+          <p data-i18n="exp_intro">Ingeniería, automatización y educación tecnológica: distintos campos, una misma forma de pensar sistemas.</p>
           <div class="experience__meter" aria-hidden="true"><span></span></div>
         </div>
         <div class="experience__list">
-          <article class="role is-current"><time class="mono">2025 — PRESENTE</time><div><h3>Cofundador</h3><p class="role__company">Loop Smiths</p><p>Desarrollo de videojuegos y soluciones interactivas.</p></div></article>
-          <article class="role"><time class="mono">2025 — PRESENTE</time><div><h3>Analista de Automatización</h3><p class="role__company">GUIMAGRA S.A</p><p>Automatización de procesos para empresas agropecuarias.</p></div></article>
-          <article class="role"><time class="mono">2025 — PRESENTE</time><div><h3>Desarrollador Web</h3><p class="role__company">Orden de San Agustín (Argentina)</p><p>Sitio institucional.</p></div></article>
-          <article class="role"><time class="mono">2025</time><div><h3>Analista de Automatización</h3><p class="role__company">IDS</p></div></article>
-          <article class="role"><time class="mono">2023 — 2025</time><div><h3>Profesor Particular de Tecnología</h3></div></article>
-          <article class="role"><time class="mono">2024</time><div><h3>Profesor de Tecnología <span>(Suplencia)</span></h3><p class="role__company">San Martín de Tours / Paula Montal</p></div></article>
-          <figure class="experience__image media-reveal"><img src="assets/direction/experience-photo.png" alt="Detalle macro de interruptores y circuitos" /></figure>
+          <article class="role is-current"><time class="mono" data-i18n="exp_role1_time">2025 — PRESENTE</time><div><h3 data-i18n="exp_role1_title">Cofundador</h3><p class="role__company">Loop Smiths</p><p data-i18n="exp_role1_desc">Desarrollo de videojuegos y soluciones interactivas.</p></div></article>
+          <article class="role"><time class="mono" data-i18n="exp_role2_time">2025 — PRESENTE</time><div><h3 data-i18n="exp_role2_title">Analista de Automatización</h3><p class="role__company">GUIMAGRA S.A</p><p data-i18n="exp_role2_desc">Automatización de procesos para empresas agropecuarias.</p></div></article>
+          <article class="role"><time class="mono" data-i18n="exp_role3_time">2025 — PRESENTE</time><div><h3 data-i18n="exp_role3_title">Desarrollador Web</h3><p class="role__company">Orden de San Agustín (Argentina)</p><p data-i18n="exp_role3_desc">Sitio institucional.</p></div></article>
+          <article class="role"><time class="mono" data-i18n="exp_role4_time">2025</time><div><h3 data-i18n="exp_role4_title">Analista de Automatización</h3><p class="role__company">IDS</p></div></article>
+          <article class="role"><time class="mono" data-i18n="exp_role5_time">2023 — 2025</time><div><h3 data-i18n="exp_role5_title">Profesor Particular de Tecnología</h3></div></article>
+          <article class="role"><time class="mono" data-i18n="exp_role6_time">2024</time><div><h3><span data-i18n="exp_role6_title">Profesor de Tecnología</span> <span>(<span data-i18n="exp_role6_sub">Suplencia</span>)</span></h3><p class="role__company">San Martín de Tours / Paula Montal</p></div></article>
+          <figure class="experience__image media-reveal">
+            <picture>
+              <source srcset="assets/direction/experience-photo.avif" type="image/avif" />
+              <source srcset="assets/direction/experience-photo.webp" type="image/webp" />
+              <img src="assets/direction/experience-photo.png" width="1915" height="821" alt="Primer plano macro de placa de circuito impreso e interruptores de alta precisión" loading="lazy" />
+            </picture>
+          </figure>
         </div>
       </section>
 
       <section class="education chapter" id="education">
-        <div class="education__head"><p class="kicker mono">APRENDER / CONSTRUIR / COMPARTIR</p><h2>EDUCACIÓN</h2></div>
+        <div class="education__head"><p class="kicker mono" data-i18n="edu_kicker">APRENDER / CONSTRUIR / COMPARTIR</p><h2 data-i18n="edu_title">EDUCACIÓN</h2></div>
         <div class="education__route">
-          <article><time class="mono">2022 — PRESENTE</time><h3>Lic. en Desarrollo de Videojuegos</h3><p>Universidad Argentina de la Empresa (UADE)</p></article>
-          <article><time class="mono">2020 — 2021</time><h3>Programación Web Full Stack</h3><p>Digital House</p></article>
-          <article><time class="mono">2015 — 2020</time><h3>Bachiller Perito Mercantil</h3><p>Instituto San Martín de Tours</p></article>
+          <article><time class="mono" data-i18n="edu_item1_time">2022 — PRESENTE</time><h3 data-i18n="edu_item1_title">Lic. en Desarrollo de Videojuegos</h3><p data-i18n="edu_item1_school">Universidad Argentina de la Empresa (UADE)</p></article>
+          <article><time class="mono">2020 — 2021</time><h3 data-i18n="edu_item2_title">Programación Web Full Stack</h3><p>Digital House</p></article>
+          <article><time class="mono">2015 — 2020</time><h3 data-i18n="edu_item3_title">Bachiller Perito Mercantil</h3><p>Instituto San Martín de Tours</p></article>
         </div>
-        <figure class="education__image media-reveal"><img src="assets/direction/education-photo.png" alt="Cuaderno técnico, teclado y control de videojuegos" /></figure>
+        <figure class="education__image media-reveal">
+          <picture>
+            <source srcset="assets/direction/education-photo.avif" type="image/avif" />
+            <source srcset="assets/direction/education-photo.webp" type="image/webp" />
+            <img src="assets/direction/education-photo.png" width="1915" height="821" alt="Espacio de trabajo con cuaderno técnico de diseño, teclado mecánico y mando de videojuegos" loading="lazy" />
+          </picture>
+        </figure>
       </section>
 
       <section class="skills chapter" id="skills">
         <div class="skills__copy">
-          <p class="kicker mono">ENGINEERING × DESIGN × SYSTEMS</p><h2>SKILLS</h2>
+          <p class="kicker mono">ENGINEERING × DESIGN × SYSTEMS</p><h2 data-i18n="skills_title">SKILLS</h2>
           <div class="skill-accordion">
-            <details open><summary><span>Lenguajes &amp; web</span><i aria-hidden="true"></i></summary><p>C++ · C# · JavaScript · HTML5 · CSS3 · JSON</p></details>
-            <details><summary><span>Engines &amp; hardware</span><i aria-hidden="true"></i></summary><p>Unreal Engine · Unity · Construct 3 · Arduino · Onshape</p></details>
-            <details><summary><span>Herramientas</span><i aria-hidden="true"></i></summary><p>Illustrator · Photoshop · Blender · Scrum · Office</p></details>
-            <details><summary><span>Patrones de diseño</span><i aria-hidden="true"></i></summary><p>Singleton · Factory · Strategy · State · Flyweight · Pool · Abstract Factory · Observer · Facade</p></details>
+            <details open><summary><span data-i18n="skill_cat1">Lenguajes &amp; web</span><i aria-hidden="true"></i></summary><p>C++ · C# · JavaScript · HTML5 · CSS3 · JSON</p></details>
+            <details><summary><span data-i18n="skill_cat2">Engines &amp; hardware</span><i aria-hidden="true"></i></summary><p>Unreal Engine · Unity · Construct 3 · Arduino · Onshape</p></details>
+            <details><summary><span data-i18n="skill_cat3">Herramientas</span><i aria-hidden="true"></i></summary><p>Illustrator · Photoshop · Blender · Scrum · Office</p></details>
+            <details><summary><span data-i18n="skill_cat4">Patrones de diseño</span><i aria-hidden="true"></i></summary><p>Singleton · Factory · Strategy · State · Flyweight · Pool · Abstract Factory · Observer · Facade</p></details>
           </div>
         </div>
         <div class="signal-lab" data-cursor="PLAY">
-          <div class="signal-lab__head"><div><p class="mono">MICRO EXPERIENCIA</p><h3>SIGNAL LAB</h3></div><div class="signal-lab__score mono"><span><small>SCORE</small><b id="signal-score">00/05</b></span><span><small>TIEMPO</small><b id="signal-time">30</b></span></div></div>
-          <p class="signal-lab__instruction mono" id="signal-status">Mové el cursor o usá las flechas. Capturá la señal.</p>
+          <div class="signal-lab__head"><div><p class="mono" data-i18n="signal_lab_eyebrow">MICRO EXPERIENCIA</p><h3>SIGNAL LAB</h3></div><div class="signal-lab__score mono"><span><small data-i18n="signal_lab_score">SCORE</small><b id="signal-score">00/05</b></span><span><small data-i18n="signal_lab_time">TIEMPO</small><b id="signal-time">30</b></span></div></div>
+          <p class="signal-lab__instruction mono" id="signal-status" data-i18n="signal_lab_instruction">Mové el cursor o usá las flechas. Capturá la señal.</p>
           <canvas id="signal-canvas" tabindex="0" aria-label="Mini juego Signal Lab. Mové la sonda con el cursor o las flechas y recolectá cinco nodos."></canvas>
-          <button class="signal-lab__reset mono" id="signal-reset" type="button">INICIAR / RESET</button>
+          <button class="signal-lab__reset mono" id="signal-reset" type="button" data-i18n="signal_lab_reset">INICIAR / RESET</button>
         </div>
       </section>
 
       <section class="projects" id="projects">
-        <div class="projects__topline mono"><span>SELECTED WORK</span><span class="projects__hint">SCROLL PARA EXPLORAR →</span></div>
+        <div class="projects__topline mono"><span data-i18n="projects_selected">SELECTED WORK</span><span class="projects__hint" data-i18n="projects_hint">SCROLL PARA EXPLORAR →</span></div>
         <div class="projects__track">
-          <div class="project project--intro"><h2>PROYECTOS</h2><p>Una selección de mundos, sistemas y productos digitales.</p><span class="mono">04 EXPERIENCIAS / DESPLAZÁ →</span></div>
-          <a class="project project--loop" href="https://loop-smith.com/" target="_blank" rel="noopener noreferrer" data-cursor="OPEN"><img src="assets/projects/loop-smiths-automation.png" alt="Sistema industrial de automatización y flujo de datos" /><img class="project__logo" src="assets/projects/loop-smiths.png" alt="" /><span class="project__index mono">01</span><div class="project__caption"><h3>Loop Smiths</h3><p>Sitio Web Oficial</p><span class="arrow-link">Abrir ↗</span></div></a>
-          <a class="project project--eclipsed" href="https://isla-games-studio.itch.io/eclipsed-fates" target="_blank" rel="noopener noreferrer" data-cursor="OPEN"><img src="assets/projects/eclipsed-fates-cover.png" alt="Arte abstracto rojo y negro de Eclipsed Fates" /><span class="project__index mono">02</span><div class="project__caption"><h3>Eclipsed Fates</h3><p>Juego publicado en Itch.io</p><span class="arrow-link">Jugar ↗</span></div></a>
-          <a class="project project--onna" href="https://insulagames.itch.io/onna" target="_blank" rel="noopener noreferrer" data-cursor="OPEN"><img src="assets/projects/onna.png" alt="Arte pixelado de Onna" /><span class="project__index mono">03</span><div class="project__caption"><h3>Onna</h3><p>Juego publicado en Itch.io</p><span class="arrow-link">Jugar ↗</span></div></a>
-          <a class="project project--github" href="https://github.com/cosmear" target="_blank" rel="noopener noreferrer" data-cursor="OPEN"><div class="code-field mono" aria-hidden="true"><span>const idea = experiment();</span><span>while (curious) build();</span><span>push(origin, project);</span></div><span class="project__index mono">04</span><div class="project__caption"><h3>GitHub</h3><p>Más proyectos y experimentos</p><span class="arrow-link">Explorar ↗</span></div></a>
+          <div class="project project--intro"><h2 data-i18n="projects_intro_title">PROYECTOS</h2><p data-i18n="projects_intro_desc">Una selección de mundos, sistemas y productos digitales.</p><span class="mono" data-i18n="projects_intro_sub">04 EXPERIENCIAS / DESPLAZÁ →</span></div>
+          <a class="project project--loop" href="https://loop-smith.com/" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
+            <picture>
+              <source srcset="assets/projects/loop-smiths-automation.avif" type="image/avif" />
+              <source srcset="assets/projects/loop-smiths-automation.webp" type="image/webp" />
+              <img src="assets/projects/loop-smiths-automation.png" width="1672" height="941" alt="Interfaz de sistema industrial de automatización de procesos y flujo de datos" loading="lazy" />
+            </picture>
+            <picture>
+              <source srcset="assets/projects/loop-smiths.avif" type="image/avif" />
+              <source srcset="assets/projects/loop-smiths.webp" type="image/webp" />
+              <img class="project__logo" src="assets/projects/loop-smiths.png" width="512" height="512" alt="Logo oficial de la empresa Loop Smiths" loading="lazy" />
+            </picture>
+            <span class="project__index mono">01</span><div class="project__caption"><h3>Loop Smiths</h3><p data-i18n="proj1_sub">Sitio Web Oficial</p><span class="arrow-link"><span data-i18n="proj_btn_open">Abrir</span> ↗</span></div>
+          </a>
+          <a class="project project--eclipsed" href="https://isla-games-studio.itch.io/eclipsed-fates" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
+            <picture>
+              <source srcset="assets/projects/eclipsed-fates-cover.avif" type="image/avif" />
+              <source srcset="assets/projects/eclipsed-fates-cover.webp" type="image/webp" />
+              <img src="assets/projects/eclipsed-fates-cover.png" width="1080" height="1919" alt="Arte promocional en tonos rojos y oscuros para el videojuego Eclipsed Fates" loading="lazy" />
+            </picture>
+            <span class="project__index mono">02</span><div class="project__caption"><h3>Eclipsed Fates</h3><p data-i18n="proj2_sub">Juego publicado en Itch.io</p><span class="arrow-link"><span data-i18n="proj_btn_play">Jugar</span> ↗</span></div>
+          </a>
+          <a class="project project--onna" href="https://insulagames.itch.io/onna" target="_blank" rel="noopener noreferrer" data-cursor="OPEN">
+            <picture>
+              <source srcset="assets/projects/onna.avif" type="image/avif" />
+              <source srcset="assets/projects/onna.webp" type="image/webp" />
+              <img src="assets/projects/onna.png" width="1818" height="486" alt="Arte pixel art detallado del videojuego independiente Onna" loading="lazy" />
+            </picture>
+            <span class="project__index mono">03</span><div class="project__caption"><h3>Onna</h3><p data-i18n="proj3_sub">Juego publicado en Itch.io</p><span class="arrow-link"><span data-i18n="proj_btn_play">Jugar</span> ↗</span></div>
+          </a>
+          <a class="project project--github" href="https://github.com/cosmear" target="_blank" rel="noopener noreferrer" data-cursor="OPEN"><div class="code-field mono" aria-hidden="true"><span>const idea = experiment();</span><span>while (curious) build();</span><span>push(origin, project);</span></div><span class="project__index mono">04</span><div class="project__caption"><h3>GitHub</h3><p data-i18n="proj4_sub">Más proyectos y experimentos</p><span class="arrow-link"><span data-i18n="proj_btn_explore">Explorar</span> ↗</span></div></a>
         </div>
         <div class="projects__progress" aria-hidden="true"><span></span></div>
       </section>
 
       <footer class="contact chapter" id="contact">
-        <div class="contact__image media-reveal" aria-hidden="true"><img src="assets/direction/contact-photo.png" alt="" /></div>
-        <p class="kicker mono">CONTACTO / CABA</p><h2>¿CONSTRUIMOS ALGO<br />QUE SE PUEDA JUGAR?</h2>
+        <div class="contact__image media-reveal" aria-hidden="true">
+          <picture>
+            <source srcset="assets/direction/contact-photo.avif" type="image/avif" />
+            <source srcset="assets/direction/contact-photo.webp" type="image/webp" />
+            <img src="assets/direction/contact-photo.png" width="1672" height="941" alt="Fotografía conceptual de contacto e interacción con interfaces digitales" loading="lazy" />
+          </picture>
+        </div>
+        <p class="kicker mono" data-i18n="contact_kicker">CONTACTO / CABA</p><h2 data-i18n="contact_title">¿CONSTRUIMOS ALGO<br />QUE SE PUEDA JUGAR?</h2>
         <a class="contact__mail" href="mailto:cargarerich8@gmail.com" data-cursor="MAIL"><span>cargarerich8@gmail.com</span><i aria-hidden="true">↗</i></a>
         <div class="contact__footer mono"><a href="tel:+5491155746444">+54 9 11 5574 6444</a><div><a href="https://www.linkedin.com/in/cosme-argerich-99630a239/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/cosmear" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><span>© 2026 Cosme Argerich</span></div>
       </footer>
     </main>
+    <!-- Marcado Estructurado Schema JSON-LD (Empresa Local / Servicios Profesionales) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Cosme Argerich — Game & Web Development",
+      "image": "https://cosmear.github.io/CV/assets/direction/hero-photo.png",
+      "telephone": "+5491155746444",
+      "email": "cargarerich8@gmail.com",
+      "url": "https://cosmear.github.io/CV/",
+      "logo": "https://cosmear.github.io/CV/assets/favicon.svg",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "CABA",
+        "addressLocality": "Ciudad Autónoma de Buenos Aires",
+        "addressRegion": "CABA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -34.6037,
+        "longitude": -58.3816
+      },
+      "sameAs": [
+        "https://github.com/cosmear",
+        "https://www.linkedin.com/in/cosme-argerich-99630a239/",
+        "https://loop-smith.com/"
+      ]
+    }
+    </script>
+
+    <!-- Marcado Estructurado Schema JSON-LD (VideoObject) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Showcase Interactivo Signal Lab & Game Development - Cosme Argerich",
+      "description": "Demostración interactiva de desarrollo de videojuegos, física canvas y sistemas web creado por Cosme Argerich.",
+      "thumbnailUrl": [
+        "https://cosmear.github.io/CV/assets/direction/hero-photo.png",
+        "https://cosmear.github.io/CV/assets/direction/profile-photo.png"
+      ],
+      "uploadDate": "2026-08-23T00:00:00-03:00",
+      "contentUrl": "https://cosmear.github.io/CV/assets/direction/hero-photo.png",
+      "embedUrl": "https://cosmear.github.io/CV/"
+    }
+    </script>
   </body>
 </html>

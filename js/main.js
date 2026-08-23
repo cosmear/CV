@@ -66,8 +66,12 @@ function initSignalLab(reduced) {
     canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (!player.x) { player.x = player.tx = width / 2; player.y = player.ty = height / 2; } if (!nodes.length) nodes = Array.from({ length: 5 }, node);
   }
-  function start() { score = 0; active = true; started = performance.now(); nodes = Array.from({ length: 5 }, node); player.trail = []; scoreEl.textContent = "00/05"; timeEl.textContent = "30"; status.textContent = "Señal activa. Recolectá los cinco nodos."; canvas.focus({ preventScroll: true }); }
-  function end(won) { active = false; status.textContent = won ? "SEÑAL CAPTURADA. Sistema sincronizado." : "TIEMPO AGOTADO. Reiniciá el sistema."; }
+  function getLangText(key, fallback) {
+    const lang = localStorage.getItem("lang") || "es";
+    return (window.TRANSLATIONS && window.TRANSLATIONS[lang] && window.TRANSLATIONS[lang][key]) || fallback;
+  }
+  function start() { score = 0; active = true; started = performance.now(); nodes = Array.from({ length: 5 }, node); player.trail = []; scoreEl.textContent = "00/05"; timeEl.textContent = "30"; status.textContent = getLangText("signal_lab_active", "Señal activa. Recolectá los cinco nodos."); canvas.focus({ preventScroll: true }); }
+  function end(won) { active = false; status.textContent = won ? getLangText("signal_lab_won", "SEÑAL CAPTURADA. Sistema sincronizado.") : getLangText("signal_lab_lost", "TIEMPO AGOTADO. Reiniciá el sistema."); }
   function aim(e) { const r = canvas.getBoundingClientRect(); player.tx = Math.max(15, Math.min(width - 15, e.clientX - r.left)); player.ty = Math.max(15, Math.min(height - 15, e.clientY - r.top)); }
   canvas.addEventListener("pointermove", aim); canvas.addEventListener("pointerdown", e => { if (!active) start(); aim(e); }); reset.addEventListener("click", start);
   canvas.addEventListener("keydown", e => { if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)) { e.preventDefault(); keys.add(e.key); if (!active) start(); } });
