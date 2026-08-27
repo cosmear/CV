@@ -54,6 +54,8 @@
 
 .education {
   --education-green: #7dff00;
+  /* Sin la foto de cierre, el --space de abajo dejaba un vacio muy grande. */
+  padding-bottom: clamp(4rem, 7vw, 7.5rem);
 }
 
 .education__route::before {
@@ -78,6 +80,10 @@
 
 @keyframes education-flow {
   to { background-position: -220% 0; }
+}
+
+@keyframes education-flow-v {
+  to { background-position: 0 -220%; }
 }
 
 @keyframes education-pulse {
@@ -146,7 +152,387 @@
   border-color: var(--orange);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Foco visible — el sitio venía apoyado en el anillo por defecto
+   del navegador, que sobre --ink casi no se ve.
+   ───────────────────────────────────────────────────────────── */
+main > section[id],
+main > header[id],
+main > footer[id] {
+  scroll-margin-top: 5.25rem;
+}
+
 @media (max-width: 780px) {
+  main > section[id],
+  main > header[id],
+  main > footer[id] {
+    scroll-margin-top: 4.5rem;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+canvas:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.education a:focus-visible,
+.education [tabindex]:focus-visible {
+  outline-color: var(--orange);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Contacto: teléfono al mismo peso visual que el email
+   ───────────────────────────────────────────────────────────── */
+.profile__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.profile__datum {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--acid);
+}
+
+.profile__datum > span {
+  color: var(--acid);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: color 0.25s ease;
+}
+
+a.profile__datum:hover > span,
+a.profile__datum:focus-visible > span {
+  color: var(--paper);
+}
+
+.contact__channels {
+  position: relative;
+  z-index: 3;
+  width: min(61rem, 72vw);
+  display: grid;
+  gap: clamp(1rem, 1.6vw, 1.75rem);
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+.contact__mail {
+  width: 100%;
+  margin-top: 0;
+  align-items: end;
+  transition: border-color 0.3s ease;
+}
+
+.contact__mail small {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: var(--muted);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+}
+
+.contact__mail--phone {
+  border-bottom-color: var(--orange);
+  color: var(--orange);
+}
+
+.contact__footer {
+  grid-template-columns: 1fr auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Nav: la sección en la que estás
+   ───────────────────────────────────────────────────────────── */
+
+/* .nav.is-scrolled aplica backdrop-filter, y eso convierte a .nav en bloque
+   contenedor de sus hijos position:fixed. Resultado: con el menú abierto
+   después de scrollear, .nav__links{inset:0} se resolvía contra la barra
+   (375x192) en vez del viewport (375x667) y el overlay no tapaba la página.
+   Con el menú abierto el blur no aporta nada, así que se desactiva. */
+body.menu-open .nav {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nav__links a.is-active {
+  color: var(--acid);
+}
+
+.nav__links a.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Signal Lab: feedback de nivel superado / partida perdida
+   ───────────────────────────────────────────────────────────── */
+#signal-status.is-win {
+  color: var(--acid);
+}
+
+#signal-status.is-lose {
+  color: var(--orange);
+}
+
+.signal-lab {
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.signal-lab.is-win {
+  border-color: var(--acid);
+  box-shadow: inset 0 0 7rem rgba(200, 255, 61, 0.16);
+}
+
+.signal-lab.is-lose {
+  border-color: var(--orange);
+  box-shadow: inset 0 0 7rem rgba(255, 90, 54, 0.14);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Experiencia: cuál estás leyendo
+   La atenuación del resto solo corre con motion (ver .motion-on), así que
+   la barra es la marca que queda cuando no hay motion: reduced-motion,
+   GSAP caído, o mobile (donde atenuar sería ilegible).
+   ───────────────────────────────────────────────────────────── */
+.role::before {
+  content: "";
+  position: absolute;
+  top: 1.4rem;
+  bottom: 1.4rem;
+  left: max(-1.5rem, calc(var(--pad) * -1));
+  width: 2px;
+  background: var(--acid);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.45s var(--ease);
+}
+
+.role.is-current::before {
+  transform: scaleY(1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Reveals por hover — Experiencia y Educación
+   Por defecto (touch) la descripción está visible y en el flujo.
+   El modo hover la esconde sobre espacio YA reservado: cero
+   layout shift al revelarla.
+   ───────────────────────────────────────────────────────────── */
+.role--detail > div {
+  position: relative;
+}
+
+.role__cue {
+  display: none;
+}
+
+.education__route article {
+  position: relative;
+}
+
+.education__route .edu-note {
+  max-width: 23rem;
+  margin: 1.1rem 0 0;
+  padding-left: 0.85rem;
+  border-left: 1px solid rgba(255, 90, 54, 0.45);
+  color: rgba(11, 13, 11, 0.62);
+  font: 400 0.74rem/1.65 var(--mono);
+}
+
+.role .role__more {
+  max-width: 40rem;
+  padding-left: 0.9rem;
+  border-left: 1px solid rgba(200, 255, 61, 0.32);
+  color: var(--muted);
+  font: 400 0.78rem/1.65 var(--mono);
+}
+
+/* Este bloque va ANTES del de hover a proposito: redefine .role y, si quedara
+   despues, le pisaria la reserva del reveal (padding-bottom). */
+@media (max-width: 1100px) and (min-width: 781px) {
+  .nav {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1.5rem;
+  }
+
+  .nav__links {
+    justify-content: center;
+  }
+
+  /* Perfil: a este ancho no entra el solape título/foto, y el min-height
+     de 140vh dejaba media pantalla vacía. Se apila. */
+  .profile {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .profile__visual {
+    position: relative;
+    top: auto;
+    order: 2;
+    width: calc(100% + var(--pad) * 2);
+    height: 46vh;
+    margin: 0 calc(var(--pad) * -1);
+    clip-path: polygon(0 5%, 96% 0, 100% 94%, 3% 100%);
+  }
+
+  .profile__visual img {
+    width: 100%;
+  }
+
+  .profile__copy {
+    padding-top: 0;
+  }
+
+  .profile__statement {
+    width: 100%;
+    margin: 0 0 2.5rem;
+    font-size: clamp(2.8rem, 5.6vw, 4.4rem);
+    line-height: 0.95;
+  }
+
+  .profile__body {
+    max-width: 46rem;
+  }
+
+  /* Experiencia: la columna sticky del título se comía el 42% del ancho. */
+  .experience {
+    display: block;
+  }
+
+  .experience__intro {
+    position: static;
+    overflow: visible;
+    padding-right: 0;
+    margin-bottom: 4rem;
+  }
+
+  .experience__intro h2 {
+    font-size: clamp(4rem, 9vw, 6.5rem);
+  }
+
+  .experience__intro > p:not(.kicker) {
+    max-width: 34rem;
+  }
+
+  .role {
+    min-height: 0;
+    padding: 3rem 0;
+  }
+
+  .role h3 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+  }
+
+  .experience__image {
+    width: calc(100% + var(--pad) * 2);
+    margin: 4rem calc(var(--pad) * -1) 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Las seis experiencias tienen reveal. El contenido va arriba (no centrado)
+     para que la reserva no dependa del alto del viewport: con align-content
+     center, en 1024x768 la nota se salía hasta 62px de su tarjeta. */
+  .role--detail {
+    align-content: start;
+    padding-bottom: 7.5rem;
+  }
+
+  .role .role__more,
+  .role__cue {
+    position: absolute;
+    top: calc(100% + 1.1rem);
+    left: 0;
+    margin: 0;
+    transition: opacity 0.35s var(--ease), transform 0.5s var(--ease);
+  }
+
+  .role .role__more {
+    margin: 0;
+    opacity: 0;
+    transform: translateY(0.6rem);
+    pointer-events: none;
+  }
+
+  .role__cue {
+    display: block;
+    color: var(--orange);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    opacity: 0.7;
+  }
+
+  .role--detail:hover .role__more,
+  .role--detail:focus-visible .role__more,
+  .role--detail:focus-within .role__more {
+    opacity: 1;
+    transform: none;
+  }
+
+  .role--detail:hover .role__cue,
+  .role--detail:focus-visible .role__cue,
+  .role--detail:focus-within .role__cue {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+
+  .education__route article {
+    padding-bottom: 7rem;
+  }
+
+  .education__route .edu-note {
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(0.6rem);
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease), transform 0.5s var(--ease);
+  }
+
+  .education__route article:hover .edu-note,
+  .education__route article:focus-visible .edu-note,
+  .education__route article:focus-within .edu-note {
+    opacity: 1;
+    transform: none;
+  }
+
+  .education__route article::after {
+    content: "+";
+    position: absolute;
+    top: -0.2rem;
+    right: 0.35rem;
+    color: var(--orange);
+    font: 400 1.15rem/1 var(--mono);
+    opacity: 0.45;
+    transition: transform 0.4s var(--ease), opacity 0.3s ease;
+  }
+
+  .education__route article:hover::after,
+  .education__route article:focus-visible::after,
+  .education__route article:focus-within::after {
+    transform: rotate(45deg);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 780px) {
+  /* El HUD pasó de dos bloques a tres (NIVEL / SCORE / TIEMPO). */
+  .signal-lab__score {
+    gap: 1.25rem;
+  }
+
   .profile__statement {
     width: auto;
     margin: 0 0 2.5rem;
@@ -251,11 +637,6 @@
     line-height: 1;
   }
 
-  .education__image {
-    height: 14rem;
-    margin-top: 1rem;
-  }
-
   .projects {
     padding-top: 4.25rem;
   }
@@ -315,8 +696,54 @@
     letter-spacing: -0.045em;
   }
 
-  .contact__mail {
+  .contact__channels {
+    width: 100%;
     margin-top: 2.5rem;
+  }
+
+  .profile__meta {
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .contact__footer {
+    grid-template-columns: 1fr;
+  }
+
+  /* Bajo 780px la página se apila: las descripciones van en el flujo,
+     visibles, sin depender del hover (aunque el puntero sea un mouse). */
+  .role--detail {
+    padding-bottom: 2.5rem;
+  }
+
+  .education__route::before {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: -0.05rem;
+    width: 3px;
+    height: auto;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--education-green), #caff35, var(--education-green));
+    background-size: 100% 220%;
+    animation: education-flow-v 3.2s linear infinite;
+  }
+
+  .role .role__more,
+  .education__route .edu-note {
+    position: static;
+    margin: 1rem 0 0;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .role__cue {
+    display: none;
+  }
+
+  .education__route article::after {
+    content: none;
   }
 
   .contact__image {
