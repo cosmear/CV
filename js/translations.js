@@ -34,6 +34,10 @@ const TRANSLATIONS = {
     // Trayectoria / Experiencia
     exp_kicker: "TRAYECTORIA",
     exp_title: "EXPERIENCIA",
+    exp_role7_time: "2026",
+    exp_role7_title: "Profesor de secundaria",
+    exp_role7_desc: "Enseñanza de Tecnología en nivel secundario.",
+    exp_role7_more: "Durante 2026 fui profesor de secundaria en el Colegio Santa Teresa de Jesús, a cargo de la materia Tecnología. Una experiencia docente centrada en compartir conocimientos tecnológicos con estudiantes de nivel secundario.",
     exp_intro: "Ingeniería, automatización y educación tecnológica: distintos campos, una misma forma de pensar sistemas.",
     exp_role1_time: "2025 — PRESENTE",
     exp_role1_title: "Cofundador",
@@ -146,6 +150,10 @@ const TRANSLATIONS = {
     // Experience
     exp_kicker: "CAREER PATH",
     exp_title: "EXPERIENCE",
+    exp_role7_time: "2026",
+    exp_role7_title: "Secondary School Teacher",
+    exp_role7_desc: "Teaching Technology at secondary school level.",
+    exp_role7_more: "In 2026, I taught Technology at Colegio Santa Teresa de Jesús as a secondary school teacher. A teaching experience focused on sharing technological knowledge with secondary school students.",
     exp_intro: "Engineering, automation, and tech education: different fields, one unified way of thinking systems.",
     exp_role1_time: "2025 — PRESENT",
     exp_role1_title: "Co-Founder",
