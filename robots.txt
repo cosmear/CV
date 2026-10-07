@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cosmear.github.io/CV/sitemap.xml
+Sitemap: https://cosmeargerich.com.ar/sitemap.xml
