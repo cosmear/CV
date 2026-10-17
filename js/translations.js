@@ -242,7 +242,8 @@ function getPreferredLanguage() {
   const urlLang = urlParams.get("lang");
   if (urlLang && TRANSLATIONS[urlLang]) return urlLang;
 
-  const storedLang = localStorage.getItem("lang");
+  let storedLang;
+  try { storedLang = localStorage.getItem("lang"); } catch { /* Almacenamiento deshabilitado. */ }
   if (storedLang && TRANSLATIONS[storedLang]) return storedLang;
 
   const browserLang = (navigator.language || "").slice(0, 2).toLowerCase();
@@ -254,7 +255,7 @@ function getPreferredLanguage() {
 function updateLanguage(lang) {
   if (!TRANSLATIONS[lang]) return;
 
-  localStorage.setItem("lang", lang);
+  try { localStorage.setItem("lang", lang); } catch { /* La selección sigue funcionando sin persistencia. */ }
   document.documentElement.lang = lang;
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -284,9 +285,10 @@ function updateLanguage(lang) {
   document
     .querySelectorAll(".translate-en-btn")
     .forEach((btn) => btn.classList.toggle("hidden", lang === "en"));
+  document.dispatchEvent(new CustomEvent("languagechange", { detail: { lang } }));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const initialLang = getPreferredLanguage();
-  updateLanguage(initialLang);
-});
+// El build inserta este archivo al final del body: traducir antes del primer
+// paint, sin esperar a los scripts de animación ni bloquear el parser del head.
+if (document.body) updateLanguage(getPreferredLanguage());
+else document.addEventListener("DOMContentLoaded", () => updateLanguage(getPreferredLanguage()));

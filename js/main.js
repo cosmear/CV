@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   initNavigation(); initScrollSpy(); initAccordion(); initSignalLab(reduced);
-  if (matchMedia("(hover: hover) and (pointer: fine)").matches && !reduced) initCursor();
+  const education = document.querySelector(".education");
+  new IntersectionObserver(([entry]) => education.classList.toggle("is-paused", !entry.isIntersecting)).observe(education);
+  if (window.gsap && matchMedia("(hover: hover) and (pointer: fine)").matches && !reduced) initCursor();
   if (window.gsap && window.ScrollTrigger) initMotion(reduced);
 });
 
@@ -27,16 +29,16 @@ function initScrollSpy() {
   const links = [...document.querySelectorAll(".nav__links a[href^='#']")];
   const pares = links.map(a => [document.querySelector(a.getAttribute("href")), a]).filter(p => p[0]);
   const roles = [...document.querySelectorAll(".role")];
+  const titles = roles.map(rol => rol.querySelector("h3") || rol);
   if (!pares.length && !roles.length) return;
   let linkActual, rolActual, pendiente = false;
 
   // Sección activa: la que cruza la línea justo debajo de la barra fija.
   // Hero y Educación no tienen link, así que ahí no se ilumina nada.
-  function elegirSeccion() {
-    const linea = nav.getBoundingClientRect().height + 8;
+  function elegirSeccion(rects, linea) {
     let encontrado = null;
-    for (const [sec, link] of pares) {
-      const r = sec.getBoundingClientRect();
+    for (let i = 0; i < pares.length; i++) {
+      const link = pares[i][1], r = rects[i];
       if (r.top <= linea && r.bottom > linea) encontrado = link;
     }
     if (encontrado === linkActual) return;
@@ -52,11 +54,11 @@ function initScrollSpy() {
   // Se mide el <h3>, no la tarjeta: la tarjeta es mucho más alta que su contenido
   // (reserva el espacio del hover), así que su centro no dice dónde estás mirando.
   // Siempre queda exactamente una activa, nunca dos.
-  function elegirRol() {
+  function elegirRol(rects) {
     const linea = innerHeight * 0.42;
     let mejor = null, mejorDist = Infinity;
-    for (const rol of roles) {
-      const t = (rol.querySelector("h3") || rol).getBoundingClientRect();
+    for (let i = 0; i < roles.length; i++) {
+      const rol = roles[i], t = rects[i];
       if (t.bottom < 0 || t.top > innerHeight) continue;
       const d = Math.abs(t.top + t.height / 2 - linea);
       if (d < mejorDist) { mejorDist = d; mejor = rol; }
@@ -66,7 +68,14 @@ function initScrollSpy() {
     roles.forEach(r => r.classList.toggle("is-current", r === mejor));
   }
 
-  function actualizar() { elegirSeccion(); elegirRol(); }
+  function actualizar() {
+    // Todas las lecturas antes de modificar clases/atributos. ScrollTrigger
+    // puede mover el pin: medir posiciones actuales conserva el scroll spy.
+    const linea = nav.getBoundingClientRect().height + 8;
+    const secciones = pares.map(([sec]) => sec.getBoundingClientRect());
+    const rects = titles.map(title => title.getBoundingClientRect());
+    elegirSeccion(secciones, linea); elegirRol(rects);
+  }
   function alScrollear() {
     if (pendiente) return;
     pendiente = true;
@@ -101,19 +110,33 @@ function initMotion(reduced) {
   document.body.classList.add("motion-on");
   gsap.timeline({ defaults: { ease: "power4.out" } })
     .from(".hero__eyebrow", { y: 18, opacity: 0, duration: .7 })
-    .from(".hero__line", { yPercent: 110, opacity: 0, duration: 1.15, stagger: .1 }, "-=.35")
+    // El título sigue deslizándose, pero es legible desde el primer frame.
+    .from(".hero__line", { yPercent: 110, duration: 1.15, stagger: .1 }, "-=.35")
     .from(".hero__media", { clipPath: "polygon(100% 0,100% 0,100% 100%,100% 100%,100% 72%,100% 50%)", duration: 1.35 }, "-=1")
     .from(".hero__footer > *", { y: 20, opacity: 0, duration: .7, stagger: .12 }, "-=.6");
   gsap.to(".hero__media img", { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
   document.querySelectorAll(".media-reveal img").forEach(img => gsap.fromTo(img, { scale: 1.1, opacity: .55 }, { scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: img.parentElement, start: "top 92%", end: "center 55%", scrub: true } }));
-  gsap.to(".experience__meter span", { width: "100%", ease: "none", scrollTrigger: { trigger: ".experience", start: "top 15%", end: "bottom 85%", scrub: true } });
+  gsap.fromTo(".experience__meter span", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".experience", start: "top 15%", end: "bottom 85%", scrub: true } });
   gsap.from(".education__route article", { y: 80, opacity: 0, stagger: .14, duration: 1, ease: "power3.out", scrollTrigger: { trigger: ".education__route", start: "top 78%" } });
   ScrollTrigger.matchMedia({ "(min-width: 781px)": () => {
     const section = document.querySelector(".projects"), track = document.querySelector(".projects__track"), progress = document.querySelector(".projects__progress span");
-    const distance = () => Math.max(0, track.scrollWidth - innerWidth);
-    const tween = gsap.to(track, { x: () => -distance(), ease: "none", scrollTrigger: { trigger: section, start: "top top", end: () => `+=${distance()}`, pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: s => gsap.set(progress, { width: `${s.progress * 100}%` }) } });
-    return () => tween.kill();
+    let distance = 0;
+    const measure = () => { distance = Math.max(0, track.scrollWidth - innerWidth); };
+    measure();
+    ScrollTrigger.addEventListener("refreshInit", measure);
+    const setProgress = gsap.quickSetter(progress, "scaleX");
+    const tween = gsap.to(track, { x: () => -distance, ease: "none", scrollTrigger: { trigger: section, start: "top top", end: () => `+=${distance}`, pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true, onUpdate: s => setProgress(s.progress) } });
+    return () => { ScrollTrigger.removeEventListener("refreshInit", measure); tween.kill(); };
   }});
+  // Una fuente o traducción puede cambiar el alto de las secciones. Agrupar
+  // esos refresh evita mediciones repetidas y conserva el pin después de ES/EN.
+  let refreshFrame;
+  const refresh = () => {
+    cancelAnimationFrame(refreshFrame);
+    refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
+  document.fonts.ready.then(refresh);
+  document.addEventListener("languagechange", refresh);
 }
 
 function initSignalLab(reduced) {
@@ -126,15 +149,17 @@ function initSignalLab(reduced) {
   const keys = new Set(), player = { x: 0, y: 0, tx: 0, ty: 0, trail: [] };
   // phase: idle -> run -> (hold -> run)* -> won | lost
   let width = 0, height = 0, nodes = [], score = 0, level = 0, phase = "idle", started = 0, holdUntil = 0, last = performance.now();
+  let inView = false, running = false, frame = 0, pausedAt = null, rect, geometryDirty = true, pendingAim, message;
 
   const pad2 = n => String(n).padStart(2, "0");
   const playing = () => phase === "run" || phase === "hold";
 
   function getLangText(key, fallback) {
-    const lang = localStorage.getItem("lang") || "es";
+    const lang = document.documentElement.lang || "es";
     return (window.TRANSLATIONS && window.TRANSLATIONS[lang] && window.TRANSLATIONS[lang][key]) || fallback;
   }
   function say(key, fallback, vars, mood) {
+    message = { key, fallback, vars, mood };
     let txt = getLangText(key, fallback);
     for (const k in vars) txt = txt.split("{" + k + "}").join(vars[k]);
     status.textContent = txt;
@@ -143,6 +168,9 @@ function initSignalLab(reduced) {
     lab.classList.toggle("is-win", mood === "win");
     lab.classList.toggle("is-lose", mood === "lose");
   }
+  document.addEventListener("languagechange", () => {
+    if (message) say(message.key, message.fallback, message.vars, message.mood);
+  });
 
   // No spawnear encima de la sonda: sería un punto regalado.
   function spawn() {
@@ -155,9 +183,9 @@ function initSignalLab(reduced) {
   }
 
   function hud(remaining) {
-    levelEl.textContent = pad2(level + 1) + "/" + pad2(LEVELS.length);
-    scoreEl.textContent = pad2(score) + "/" + pad2(LEVELS[level].nodes);
-    timeEl.textContent = remaining.toFixed(1);
+    for (const [el, value] of [[levelEl, pad2(level + 1) + "/" + pad2(LEVELS.length)], [scoreEl, pad2(score) + "/" + pad2(LEVELS[level].nodes)], [timeEl, remaining.toFixed(1)]]) {
+      if (el.textContent !== value) el.textContent = value;
+    }
   }
 
   function beginLevel(i) {
@@ -171,21 +199,49 @@ function initSignalLab(reduced) {
   function startGame() { beginLevel(0); canvas.focus({ preventScroll: true }); }
 
   function resize() {
-    const rect = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2); width = rect.width; height = rect.height;
+    rect = canvas.getBoundingClientRect(); geometryDirty = false;
+    const dpr = Math.min(devicePixelRatio || 1, 2); width = rect.width; height = rect.height;
     canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (!player.x) { player.x = player.tx = width / 2; player.y = player.ty = height / 2; }
     if (!nodes.length && phase === "idle") { nodes = Array.from({ length: LEVELS[0].nodes }, spawn); hud(LEVELS[0].time); }
   }
 
-  function aim(e) { const r = canvas.getBoundingClientRect(); player.tx = Math.max(15, Math.min(width - 15, e.clientX - r.left)); player.ty = Math.max(15, Math.min(height - 15, e.clientY - r.top)); }
+  function aim(e) { pendingAim = { x: e.clientX, y: e.clientY }; }
   canvas.addEventListener("pointermove", aim);
   canvas.addEventListener("pointerdown", e => { if (!playing()) startGame(); aim(e); });
   reset.addEventListener("click", startGame);
   canvas.addEventListener("keydown", e => { if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)) { e.preventDefault(); keys.add(e.key); if (!playing()) startGame(); } });
   canvas.addEventListener("keyup", e => keys.delete(e.key));
-  addEventListener("resize", resize);
+  canvas.addEventListener("blur", () => keys.clear());
+  addEventListener("scroll", () => { geometryDirty = true; }, { passive: true });
+  new ResizeObserver(() => { if (running) resize(); }).observe(canvas);
+
+  function syncVisibility() {
+    const active = inView && !document.hidden;
+    if (active === running) return;
+    running = active;
+    const now = performance.now();
+    if (!active) {
+      cancelAnimationFrame(frame); keys.clear(); pendingAim = null; pausedAt = now;
+      return;
+    }
+    if (pausedAt !== null) {
+      const elapsed = now - pausedAt;
+      if (phase === "run") started += elapsed;
+      if (phase === "hold") holdUntil += elapsed;
+      pausedAt = null;
+    }
+    last = now; resize(); frame = requestAnimationFrame(draw);
+  }
+  new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; syncVisibility(); }).observe(canvas);
+  document.addEventListener("visibilitychange", syncVisibility);
 
   function draw(now) {
+    if (!running) return;
+    if (pendingAim) {
+      if (geometryDirty) { rect = canvas.getBoundingClientRect(); geometryDirty = false; }
+      player.tx = pendingAim.x - rect.left; player.ty = pendingAim.y - rect.top; pendingAim = null;
+    }
     const dt = Math.min(32, now - last); last = now; ctx.clearRect(0, 0, width, height);
     // Con 5 segundos por nivel el teclado necesita ir más rápido para ser jugable.
     if (keys.has("ArrowLeft")) player.tx -= dt * .42; if (keys.has("ArrowRight")) player.tx += dt * .42; if (keys.has("ArrowUp")) player.ty -= dt * .42; if (keys.has("ArrowDown")) player.ty += dt * .42;
@@ -214,7 +270,6 @@ function initSignalLab(reduced) {
     } else if (phase === "hold" && now >= holdUntil) {
       beginLevel(level + 1);
     }
-    requestAnimationFrame(draw);
+    frame = requestAnimationFrame(draw);
   }
-  resize(); requestAnimationFrame(draw);
 }

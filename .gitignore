@@ -11,6 +11,12 @@ node_modules/
 dist/
 .cache/
 
+# Intermedios de imágenes; se publican sus copias con hash en assets/static/.
+assets/direction/*-[0-9]*.avif
+assets/direction/*-[0-9]*.webp
+assets/projects/*-[0-9]*.avif
+assets/projects/*-[0-9]*.webp
+
 # Sistema / editor
 .DS_Store
 Thumbs.db

@@ -2,6 +2,25 @@
   display: block;
 }
 
+/* Mantener el pulso y la ruta animada cuando se ven, sin repintar fuera de vista. */
+.education.is-paused .education__route::before,
+.education.is-paused .education__route article::before {
+  animation-play-state: paused;
+}
+
+/* Barras idénticas visualmente, sin cambiar el layout en cada frame. */
+.experience__meter span,
+.projects__progress span {
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* Sin GSAP (o con reduced-motion), los proyectos siguen siendo accesibles. */
+@media (min-width: 781px) {
+  body:not(.motion-on) .projects { overflow-x: auto; }
+}
+
 /* Desktop refinements from rendered QA */
 .profile {
   grid-template-columns: minmax(0, 1fr) minmax(32rem, 1fr);

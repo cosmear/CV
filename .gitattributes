@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Fingerprints describe exact bytes; never rewrite generated delivery files.
+assets/static/* -text
